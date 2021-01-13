@@ -35,7 +35,7 @@ namespace HumanResource
         }
         public void SelfIntroduce()
         {
-            Console.WriteLine(this.ToString());
+            Console.WriteLine($"Hello everyone. I'm {Name}. I'm {Age} years old now.");
         }
     }
 }

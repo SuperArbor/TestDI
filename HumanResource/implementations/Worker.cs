@@ -13,7 +13,7 @@ namespace HumanResource
 
         public override void Live()
         {
-            Console.WriteLine($"{Name}: Get up in the morning, Go to company in the day, Sleep in the evening");
+            Console.WriteLine($"{Name}: 996");
         }
     }
 }

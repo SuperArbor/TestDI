@@ -5,7 +5,7 @@ using System.Text;
 namespace HumanResource
 {
     /// <summary>
-    /// Objects with a globally unique id
+    /// 接口：表示由全局唯一Id的对象
     /// </summary>
     public interface IIdentifiable
     {

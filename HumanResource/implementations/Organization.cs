@@ -93,15 +93,11 @@ namespace HumanResource
 
         public void Live()
         {
+            Console.WriteLine($"属于{Name}的生活方式：");
             foreach (var m in _people)
                 m.Live();
         }
-        public void Introduce()
-        {
-            Console.WriteLine($"The organization name:{Name}. We have {_people.Count} members");
-            foreach (var m in _people)
-                m.SelfIntroduce();
-        }
+
         public override string ToString()
         {
             var s = $"Type:{Type},\tName:{Name},\tCount:{Count},\tList:\n";

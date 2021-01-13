@@ -25,6 +25,7 @@ namespace HRManager.Views
         public MainWindow(IServiceProvider sp)
         {
             this.MainWindowViewModel = new MainWindowViewModel(sp);
+            //上下文绑定
             this.DataContext = MainWindowViewModel;
             InitializeComponent();
         }

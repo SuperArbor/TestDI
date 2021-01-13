@@ -18,16 +18,24 @@ namespace HRManager
     public partial class App : Application
     {
         private IServiceProvider ServiceProvider { get; set; }
-        public MainWindow AppMainWindow { get; set; }
         
+        /// <summary>
+        /// 主程序入口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void AppStartup(object sender, StartupEventArgs e)
         {
             var services = new ServiceCollection();
             ConfigureServices(services);
 
-            AppMainWindow = new MainWindow(ServiceProvider);
-            AppMainWindow.Show();
+            var appMainWindow = new MainWindow(ServiceProvider);
+            appMainWindow.Show();
         }
+        /// <summary>
+        /// 注册服务
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(ServiceCollection services)
         {
             services.AddSingleton<IHumanCenter, HumanCenter>(sp =>
