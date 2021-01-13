@@ -5,27 +5,27 @@ using MesBase.Mvvm;
 using HumanResource;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace HRManager.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
-        private IServiceProvider ServiceProvider { get; set; }
         private IHumanCenter HumanCenter { get; set; }
         private IPersonFactory PersonFactory { get; set; }
         public MainWindowViewModel(IServiceProvider sp)
         {
-            this.ServiceProvider = sp;
             this.HumanCenter = sp.GetService(typeof(IHumanCenter)) as IHumanCenter;
             this.PersonFactory = sp.GetService(typeof(IPersonFactory)) as IPersonFactory;
-            Organizations = new ObservableCollection<IOrganization>(HumanCenter.GetOrganizations());
+            this.Organizations = new ObservableCollection<Organization>();
+            HumanCenter.GetOrganizations().ForEach(org => Organizations.Add(org as Organization));
             var names = new List<string>();
             foreach (var o in Organizations) names.Add(o.Name);
-            OrganizationNames = new ObservableCollection<string>(names);
+            this.OrganizationNames = new ObservableCollection<string>(names);
         }
 
         #region ObservableObjects
-        public ObservableCollection<IOrganization> Organizations { get; set; }
+        public ObservableCollection<Organization> Organizations { get; set; }
         public ObservableCollection<string> OrganizationNames { get; set; }
         private string _organizationName;
         public string OrganizationName
@@ -60,12 +60,33 @@ namespace HRManager.ViewModels
             get => _personAge;
             set => SetProperty(ref _personAge, value);
         }
-        
-        public RelayCommand AddPersonCommand => new RelayCommand(() =>
+        private Organization _currentOrganization;
+        public Organization CurrentOrganization
+        {
+            get => _currentOrganization;
+            set => SetProperty(ref _currentOrganization, value);
+        }
+        private IPerson _currentPerson;
+        public IPerson CurrentPerson
+        {
+            get => _currentPerson;
+            set => SetProperty(ref _currentPerson, value);
+        }
+        public ICommand AddPersonCommand => new RelayCommand(() =>
         {
             var currentOrganization = HumanCenter.GetOrganizationByName(OrganizationName);
-            var person = PersonFactory.CreatePerson(PersonType, PersonName, PersonGender, PersonAge);
-            currentOrganization.AddMember(person);
+            if(currentOrganization != null)
+            {
+                var person = PersonFactory.CreatePerson(PersonType, PersonName, PersonGender, PersonAge);
+                currentOrganization.AddMember(person);
+            }
+        });
+        public ICommand RemovePersonCommand => new RelayCommand(() =>
+        {
+            if (CurrentOrganization != null)
+            {
+                CurrentOrganization.RemoveMember(CurrentPerson);
+            }
         });
         #endregion
     }

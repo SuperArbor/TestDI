@@ -8,6 +8,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using HumanResource;
 using HRManager.Views;
+using System.Collections.ObjectModel;
 
 namespace HRManager
 {
@@ -31,10 +32,22 @@ namespace HRManager
         {
             services.AddSingleton<IHumanCenter, HumanCenter>(sp =>
             {
-                var zju = new School(Guid.NewGuid().ToString(), "ZJU");
-                var pku = new School(Guid.NewGuid().ToString(), "PKU");
-                var huawei = new Company(Guid.NewGuid().ToString(), "Huawei");
-                var ali = new Company(Guid.NewGuid().ToString(), "Ali");
+                //定义person加入organization后的处理事项
+                var onEntered = new Action<IOrganization, IPerson>((org, p) =>
+                {
+                    p.Organization = org.Name;
+                    (org as Organization).PeopleToShow = new ObservableCollection<IPerson>(org.GetMembers());
+                });
+                //定义person离开organization后的处理事项
+                var onLeft = new Action<IOrganization, IPerson>((org, p) =>
+                {
+                    p.Organization = string.Empty;
+                    (org as Organization).PeopleToShow = new ObservableCollection<IPerson>(org.GetMembers());
+                });
+                var zju = new School(Guid.NewGuid().ToString(), "ZJU", onEntered, onLeft);
+                var pku = new School(Guid.NewGuid().ToString(), "PKU", onEntered, onLeft);
+                var huawei = new Company(Guid.NewGuid().ToString(), "Huawei", onEntered, onLeft);
+                var ali = new Company(Guid.NewGuid().ToString(), "Ali", onEntered, onLeft);
 
                 var hc = new HumanCenter();
                 hc.AddOrganization(zju);

@@ -12,9 +12,12 @@ namespace HumanResource
         public string Name { get; set; }
         public Gender Gender { get; set; }
         public int Age { get; set; }
-        public IOrganization Organization { get; set; }
+        public string Organization { get; set; }
+
+        #region ILegalPerson
         public string Rights { get; set; }
         public string Responsibility { get; set; }
+        #endregion
 
         public abstract void Live();
         public Person(string id, string name, string gender, int age)

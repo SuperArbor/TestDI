@@ -8,12 +8,13 @@ namespace HumanResource
     {
         string Name { get; set; }
         string Type { get; }
-        int Count { get; }
+        int Count { get; set; }
         string Description { get; set; }
-        //ICollection<IPerson> People { get; }
         void AddMember(IPerson person);
         void RemoveMember(IPerson person);
         IPerson GetMember(string Id);
+        bool ContainsMember(IPerson person);
+        List<IPerson> GetMembers();
         void Live();
         void Introduce();
     }

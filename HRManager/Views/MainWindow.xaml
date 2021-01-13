@@ -8,14 +8,20 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="200*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="20*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
+        <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="50*"/>
@@ -40,25 +46,64 @@
             <TextBox Grid.Row="3" Grid.Column="1" Height="30" VerticalContentAlignment="Center"
                      Text="{Binding PersonAge}"/>
         </Grid>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-            <ComboBox ItemsSource="{Binding OrganizationNames}" SelectedItem="{Binding OrganizationName}"/>
-            <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Organizations}">
+        <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical">
+            <Label Content="Choose an organization"/>
+            <ComboBox ItemsSource="{Binding OrganizationNames}" 
+                      SelectedItem="{Binding OrganizationName}"/>
+            
+            <Label Content="Organization Infomation"/>
+            
+            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" 
+                      SelectedItem="{Binding CurrentOrganization}"
+                      ItemsSource="{Binding Organizations}">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="DarkGreen"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Green"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextColorKey}" Color="White"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="White"/>
+                </DataGrid.Resources>
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
+                </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Description}"/>
+                            <DataGrid Background="Aqua" AutoGenerateColumns="False" 
+                                      SelectedItem="{Binding RelativeSource=
+                                        {RelativeSource AncestorType=DataGrid,Mode=FindAncestor},
+                                        Path=DataContext.CurrentPerson}"
+                                      ItemsSource="{Binding PeopleToShow}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"/>
+                                    <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+                                    <DataGridTemplateColumn Header="Remove">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="Red" 
+                                                        Command="{Binding RelativeSource=
+                                                            {RelativeSource AncestorLevel=2,AncestorType=DataGrid,Mode=FindAncestor},
+                                                            Path=DataContext.RemovePersonCommand}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>
             </DataGrid>
         </StackPanel>
         
-        <Button Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+        <Button Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3"
                 Width="200"
                 Content="Add"
                 Command="{Binding AddPersonCommand}"/>

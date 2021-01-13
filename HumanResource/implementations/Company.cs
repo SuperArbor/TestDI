@@ -6,11 +6,10 @@ namespace HumanResource
 {
     public class Company : Organization
     {
-        public Company(string id, string name) : base(id, name)
-        {
-        }
-
-        public Company(string id, string name, ICollection<IPerson> people) : base(id, name, people)
+        public Company(string id, string name, 
+            Action<IOrganization, IPerson> onMemberEntered = null,
+            Action<IOrganization, IPerson> onMemberLeft = null) 
+            : base(id, name, onMemberEntered, onMemberLeft)
         {
         }
 

@@ -10,7 +10,7 @@ namespace HumanResource
         string Name { get; set; }
         Gender Gender { get; set; }
         int Age { get; set; }
-        IOrganization Organization { get; set; }
+        string Organization { get; set; }
         void SelfIntroduce();
         void Live();
     }
