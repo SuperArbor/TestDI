@@ -21,12 +21,11 @@ namespace HRManager.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindowViewModel MainWindowViewModel { get; set; }
         public MainWindow(IServiceProvider sp)
         {
-            this.MainWindowViewModel = new MainWindowViewModel(sp);
+            var viewModel = new MainWindowViewModel(sp);
             //上下文绑定
-            this.DataContext = MainWindowViewModel;
+            this.DataContext = viewModel;
             InitializeComponent();
         }
     }
