@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using HumanResource;
 
-namespace HumanResource
+namespace HumanResourceConsole
 {
     class Program
     {
@@ -12,8 +13,8 @@ namespace HumanResource
             //var school = new School(Guid.NewGuid().ToString(), "ZJU");
             //var company = new Company(Guid.NewGuid().ToString(), "Huawei");
 
-            var school = new School(Guid.NewGuid().ToString(), "ZJU", 
-                (org, p) => 
+            var school = new School(Guid.NewGuid().ToString(), "ZJU",
+                (org, p) =>
                 {
                     p.Organization = org.Name;
                     Console.WriteLine($"{org.Name}欢迎新生{p.Name}");

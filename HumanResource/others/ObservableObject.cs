@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MesBase.Mvvm
+namespace HumanResource
 {
     /// <summary>
     /// 通知属性更改 基类，ViewModel需要通知界面时，需要继承<see cref="INotifyPropertyChanged"/>这个接口
@@ -23,7 +26,7 @@ namespace MesBase.Mvvm
         /// 通知属性更改，每次触发不需要添加名字参数
         /// </summary>
         /// <param name="propertyName"></param>
-        public void OnPropertyChanged([CallerMemberName]string propertyName = null) 
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             RaisePropertyChanged(propertyName);
         }
@@ -35,7 +38,7 @@ namespace MesBase.Mvvm
         /// <param name="Value"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        protected bool SetProperty<T>(ref T Field, T Value, [CallerMemberName]string propertyName = null)
+        protected bool SetProperty<T>(ref T Field, T Value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(Field, Value))
             {

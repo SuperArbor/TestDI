@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResource", "HumanResource\HumanResource.csproj", "{807AF607-2F8C-47D8-8E87-4A2E782EF503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResource", "HumanResource\HumanResource.csproj", "{807AF607-2F8C-47D8-8E87-4A2E782EF503}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRManager", "HRManager\HRManager.csproj", "{1EADDDBB-C969-4FBD-A6B3-42275E4EBC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRManager", "HRManager\HRManager.csproj", "{1EADDDBB-C969-4FBD-A6B3-42275E4EBC2B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MesBase.Mvvm", "MesBase.Mvvm\MesBase.Mvvm.csproj", "{910EE95C-E286-449B-88A1-EA997C422884}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRManagerConsole", "HRManagerConsole\HRManagerConsole.csproj", "{F4C1A4B6-0967-4BA0-89AC-DE7A5B5E53FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{910EE95C-E286-449B-88A1-EA997C422884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{910EE95C-E286-449B-88A1-EA997C422884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{910EE95C-E286-449B-88A1-EA997C422884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4C1A4B6-0967-4BA0-89AC-DE7A5B5E53FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4C1A4B6-0967-4BA0-89AC-DE7A5B5E53FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4C1A4B6-0967-4BA0-89AC-DE7A5B5E53FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4C1A4B6-0967-4BA0-89AC-DE7A5B5E53FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
